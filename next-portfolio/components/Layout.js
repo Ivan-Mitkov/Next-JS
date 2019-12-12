@@ -30,6 +30,9 @@ const Layout = props => {
         <Link href="/hireme">
           <a>Hire Me</a>
         </Link>
+        <Link href="/blog">
+          <a>Blog</a>
+        </Link>
       </header>
       <div className="root">
         <h1>{props.title}</h1>
