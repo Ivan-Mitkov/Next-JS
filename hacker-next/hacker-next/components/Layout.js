@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Head from "next/head";
 
-const Layout = ({ children, title,description }) => {
+const Layout = ({ children, title, description }) => {
   return (
     <div>
       <Head>
         <title>{title}</title>
-        <meta name='description' content={description}/>
+        <meta name="description" content={description} />
       </Head>
       <div className="container">
         <nav>
@@ -18,8 +18,7 @@ const Layout = ({ children, title,description }) => {
         </nav>
         {children}
       </div>
-      <style jsx>
-        {`
+      <style jsx>{`
           .container {
             max-width: 800px;
             margin: 0 auto;
@@ -41,8 +40,7 @@ const Layout = ({ children, title,description }) => {
           }
         `}
       </style>
-      <style global jsx>
-        {`
+      <style global jsx>{`
           body {
             background: white;
             font-family: Verdana, Geneva, sans-serif;

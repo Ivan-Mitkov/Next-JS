@@ -4,6 +4,8 @@ const StoryList = ({ stories }) => {
   return (
     <div className="story-list">
       {stories.map(story => {
+          // console.log(JSON.stringify(story))
+
         return (
           <div className="story" key={story.id}>
             <h4 className="story-title">
@@ -12,7 +14,7 @@ const StoryList = ({ stories }) => {
             <div className="story-details">
               <span>{story.points || 0} points </span>
               <Link href={`/story?id=${story.id}`}>
-                <a>{story.coments_count || 0} comments</a>
+                <a>{story.comments_count || 0} comments</a>
               </Link>
             </div>
           </div>
