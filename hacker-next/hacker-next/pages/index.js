@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 
 class Home extends React.Component {
   static async getInitialProps({ req, res, query }) {
-    console.log('query',query)
+    // console.log('query',query)
     let stories = null;
     let page = 1;
     try {
