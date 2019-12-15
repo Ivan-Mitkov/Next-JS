@@ -1,7 +1,8 @@
 import Head from "next/head";
 import fetch from "isomorphic-fetch";
 import Error from "next/error";
-import StoryList from '../components/StoryList';
+import StoryList from "../components/StoryList";
+import Layout from "../components/Layout";
 
 class Home extends React.Component {
   static async getInitialProps() {
@@ -24,15 +25,9 @@ class Home extends React.Component {
       return <Error statusCode={503} />;
     }
     return (
-      <div>
-        <Head>
-          <title>Home</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-
-        <h1>Hacker Next</h1>
-       <StoryList stories={stories}/>
-      </div>
+      <Layout title='Hacker Next' description='A HAcker news clone made with next.js'>
+        <StoryList stories={stories} />
+      </Layout>
     );
   }
 }
