@@ -21,6 +21,16 @@ class Home extends React.Component {
     }
     return { page, stories };
   }
+  //register service worker
+  componentDidMount(){
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('./service-worker.js').then(registration=>{
+        console.log('Service worker registration succes')
+      }).catch((e)=>{
+        console.warn('service worker registration failed', e.message)
+      })
+    }
+  }
 
   render() {
     const { stories, page } = this.props;

@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "set NODE_ENV=production && node server.js",
+    "heroku-postbuild":"next build"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "isomorphic-fetch": "^2.2.1",
     "next": "9.1.5",
     "react": "16.12.0",
-    "react-dom": "16.12.0"
+    "react-dom": "16.12.0",
+    "sw-precache-webpack-plugin": "^0.11.5"
   }
 }
