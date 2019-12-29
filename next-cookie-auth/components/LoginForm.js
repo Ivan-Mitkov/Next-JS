@@ -2,8 +2,8 @@ import { loginUser } from "../lib/auth";
 
 class LoginForm extends React.Component {
   state = {
-    email: "",
-    password: ""
+    email: "Sincere@april.biz",
+    password: "hildegard.org"
   };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -15,6 +15,7 @@ class LoginForm extends React.Component {
     loginUser(email, password);
   };
   render() {
+    const{email,password}=this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
@@ -22,6 +23,7 @@ class LoginForm extends React.Component {
             type="email"
             name="email"
             placeholder="email"
+            value={email}
             onChange={this.handleChange}
           />
         </div>
@@ -30,6 +32,7 @@ class LoginForm extends React.Component {
             type="password"
             name="password"
             placeholder="password"
+            value={password}
             onChange={this.handleChange}
           />
         </div>
