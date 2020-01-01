@@ -1,8 +1,9 @@
 import Link from "next/link";
+import { logoutUser } from "../lib/auth";
 
 const Layout = props => {
   const { title, children, auth } = props;
-//   console.log("Layout: ", props);
+  //   console.log("Layout: ", props);
   const { user = {} } = auth || {};
   return (
     <div className="root">
@@ -20,7 +21,8 @@ const Layout = props => {
               <Link href="/profile">
                 <a>Profile</a>
               </Link>
-              <button>Logout</button>
+              {/* logout on the client and must logout on the server */}
+              <button onClick={logoutUser}>Logout</button>
             </>
           ) : (
             <Link href="/login">

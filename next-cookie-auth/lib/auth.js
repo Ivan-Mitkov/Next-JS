@@ -1,4 +1,5 @@
 import axios from "axios";
+import Router from "next/router";
 
 //to pass the cookies into backend we need this configuration
 axios.defaults.withCredentials = true;
@@ -44,6 +45,15 @@ export const getClientSideToken = () => {
   return { user: {} };
 };
 
+export const logoutUser = async () => {
+  //check if we are in the client and clear window object
+  if (typeof window !== undefined) {
+    window[WINDOW_USER_SCRIPT_VARIABLE] = {};
+  }
+  //send post request to the server in oder to clean cookies
+  await axios.post("/api/logout");
+  Router.push("/login");
+};
 //by using higher order function can get context object from getInitialProps()
 export const authInitialProps = () => ({ req, res }) => {
   //if we are loading from the server want to execute getServerSideToken()

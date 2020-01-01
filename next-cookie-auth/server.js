@@ -58,6 +58,13 @@ app.prepare().then(() => {
     res.cookie("token", userData, COOKIE_OPTIONS);
     res.json(userData);
   });
+  //logout user
+  server.post('/api/logout',(req,res)=>{
+    //need to clear cookie 
+    res.clearCookie('token',COOKIE_OPTIONS);
+    //send back status 204 no content
+    res.sendStatus(204)
+  })
 
   //profile route
   server.get("/api/profile", async (req, res) => {
