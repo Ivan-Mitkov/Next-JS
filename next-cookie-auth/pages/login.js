@@ -1,7 +1,9 @@
-import LoginForm from '../components/LoginForm'
-
+import LoginForm from "../components/LoginForm";
+import Layout from "../components/Layout";
 const Login = () => (
-  <LoginForm/>
-)
+  <Layout title='Login'>
+    <LoginForm />
+  </Layout>
+);
 
-export default Login
+export default Login;
