@@ -34,3 +34,19 @@ export const getServerSideToken = req => {
   }
   return { user: signedCookies.token };
 };
+
+export const getClientSideToken = () => {
+  //check if we are in the client
+  if (typeof window !== undefined) {
+    const user = window[WINDOW_USER_SCRIPT_VARIABLE] || {};
+    return { user };
+  }
+  return { user: {} };
+};
+
+//by using higher order function can get context object from getInitialProps()
+export const authInitialProps = () => ({ req, res }) => {
+  //if we are loading from the server want to execute getServerSideToken()
+  const auth = req ? getServerSideToken(req) : getClientSideToken();
+  return { auth };
+};
