@@ -9,14 +9,14 @@ const app = next({ dev });
 
 const handler = app.getRequestHandler();
 const AUTH_USER_TYPE = "authenticated";
-const COOKIE_SECRET='dsarfewgds';
-const COOKIE_OPTIONS={
-    //prevents client side access to the cookie
-   httpOnly:true,
-   //only with https
-   secure:!dev,
-   signed:true
-}
+const COOKIE_SECRET = "dsarfewgds";
+const COOKIE_OPTIONS = {
+  //prevents client side access to the cookie
+  httpOnly: true,
+  //only with https
+  secure: !dev,
+  signed: true
+};
 
 const authenticate = async (email, password) => {
   //using https://jsonplaceholder.typicode.com/users
@@ -38,6 +38,7 @@ app.prepare().then(() => {
 
   //parsing json in express like bodyparser
   server.use(express.json());
+  server.use(express.urlencoded());
   //get data from cookies cookie secret is for signed cookies
   server.use(cookieParser(COOKIE_SECRET));
 
@@ -54,8 +55,28 @@ app.prepare().then(() => {
       email: user.email,
       type: AUTH_USER_TYPE
     };
-    res.cookie('token',userData,COOKIE_OPTIONS);
+    res.cookie("token", userData, COOKIE_OPTIONS);
     res.json(userData);
+  });
+
+  //profile route
+  server.get("/api/profile", async (req, res) => {
+    const { signedCookies = {} } = req;
+
+    const { token } = signedCookies;
+    // console.log("req signedCookie", token);
+
+
+    if (token && token.email) {
+      const { data } = await axios.get(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+
+      const userProfile = data.find(user => user.email === token.email);
+      return res.json({ user: userProfile });
+    }
+   
+    res.sendStatus(404);
   });
 
   //handle pages
